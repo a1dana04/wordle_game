@@ -28,7 +28,7 @@ const WordG = () => {
                 const index = row * 5 + col;
                 const inputValue = guesses[row][col] || "";
                 const tileClass =
-                  currentIndex > row ? getTileClass(inputValue, col) : "";
+                  currentIndex > row || gameOver ? getTileClass(inputValue, col, row) : "";
                 return (
                   <Tile
                     key={index}
@@ -41,7 +41,10 @@ const WordG = () => {
             </div>
           ))}
           {gameOver && (
-            <button onClick={initializeGame}>Начать заново</button>
+            <div>
+              <p>Правильное слово: {word}</p>
+              <button onClick={initializeGame}>Начать заново</button>
+            </div>
           )}
         </div>
       )}
@@ -50,6 +53,7 @@ const WordG = () => {
 };
 
 export default WordG;
+
 
 
 
