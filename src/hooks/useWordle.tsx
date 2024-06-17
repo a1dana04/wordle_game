@@ -19,7 +19,7 @@ export const useWordle = () => {
     if (data.length > 0) {
       const randomIndex = Math.floor(Math.random() * data.length);
       const randomWord = data[randomIndex];
-      console.log("Randomly selected word:", randomWord); // Выводим в консоль выбранное слово
+      console.log("Случайно выбранное слово:", randomWord);
       setWord(randomWord);
       setGuesses(Array.from({ length: 6 }, () => Array(5).fill("")));
       setCurrentGuesses("");
@@ -40,6 +40,7 @@ export const useWordle = () => {
           setCurrentIndex(currentIndex + 1);
           setCurrentGuesses("");
         } else {
+          alert(`Вы проиграли. Правильное слово: ${word}`);
           setGameOver(true);
         }
       }
@@ -64,17 +65,17 @@ export const useWordle = () => {
     setGuesses(newGuesses);
   }, [currentGuesses, currentIndex]);
 
-  const getTileClass = (letter: string, col: number) => {
-    if (currentIndex <= guesses.length) {
-      if (word[col] === letter) {
-        return "correct";
-      }
-      if (word.includes(letter)) {
-        return "present";
-      }
-      return "incorrect";
+  const getTileClass = (letter: string, col: number, row: number) => {
+    if (gameOver && guesses[row].join('') === word) {
+      return "correct";
     }
-    return "";
+    if (word[col] === letter) {
+      return "correct";
+    }
+    if (word.includes(letter)) {
+      return "present";
+    }
+    return "incorrect";
   };
 
   return {
@@ -88,6 +89,8 @@ export const useWordle = () => {
     initializeGame,
   };
 };
+
+
 
 
 
