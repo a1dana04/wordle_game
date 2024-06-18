@@ -66,9 +66,8 @@ export const useWordle = () => {
   }, [currentGuesses, currentIndex]);
 
   const getTileClass = (letter: string, col: number, row: number) => {
-    if (gameOver && guesses[row].join('') === word) {
-      return "correct";
-    }
+    if (letter === "") return "";
+    
     if (word[col] === letter) {
       return "correct";
     }
@@ -77,6 +76,7 @@ export const useWordle = () => {
     }
     return "incorrect";
   };
+  
 
   return {
     word,
