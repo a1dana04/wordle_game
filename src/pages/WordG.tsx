@@ -40,9 +40,14 @@ const WordG = () => {
               })}
             </div>
           ))}
-          {gameOver && (
+          {gameOver && currentGuesses !== word && (
             <div>
               <p>Правильное слово: {word}</p>
+              <button onClick={initializeGame}>Начать заново</button>
+            </div>
+          )}
+          {gameOver && currentGuesses === word && (
+            <div>
               <button onClick={initializeGame}>Начать заново</button>
             </div>
           )}
@@ -53,6 +58,7 @@ const WordG = () => {
 };
 
 export default WordG;
+
 
 
 
